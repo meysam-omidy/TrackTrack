@@ -1,5 +1,5 @@
 ## Datasets
-Save .json files under "./datasets/" 
+Save .json files under "./jsons/" 
   - [mot17_val.json](https://drive.google.com/file/d/1hqcoFTtdzd5xMrC_xgz6mniI_sKg_0G9/view?usp=drive_link)
   - [mot17_test.json](https://drive.google.com/file/d/1CQ91C7Hl4B2rDfy_IU2orusD9vaiD5cs/view?usp=drive_link)
   - [mot20_val.json](https://drive.google.com/file/d/16IrR-TWc-K6c6NHwjM3OV74NBXPrxR-_/view?usp=drive_link)
@@ -19,22 +19,28 @@ Save weights files under "./weights/"
 Detection results will be created under "../outputs/1. det/" as pickle files
 ```
 # For MOT17 validation
-python detect.py -f "exps/yolox_x_mot17_val.py" -c "weights/mot17_train_half.pth.tar" -b 1 -d 1 -n "../outputs/1. det/mot17_val_half.pickle" --fp16 --fuse
+python detect.py -f "exps/yolox_x_mot17_val.py" -c "weights/mot17_half.pth.tar" --nms 0.80 -n "../outputs/1. det/mot17_val_0.80.pickle" -b 1 -d 1 --fp16 --fuse
+python detect.py -f "exps/yolox_x_mot17_val.py" -c "weights/mot17_half.pth.tar" --nms 0.95 -n "../outputs/1. det/mot17_val_0.95.pickle" -b 1 -d 1 --fp16 --fuse
 
 # For MOT17 test
-python detect.py -f "exps/yolox_x_mot17_test.py" -c "weights/mot7_train.pth.tar" -b 1 -d 1 -n "../outputs/1. det/mot17_test.pickle" --fp16 --fuse
+python detect.py -f "exps/yolox_x_mot17_test.py" -c "weights/mot17.pth.tar" --nms 0.80 -n "../outputs/1. det/mot17_test_0.80.pickle" -b 1 -d 1 --fp16 --fuse
+python detect.py -f "exps/yolox_x_mot17_test.py" -c "weights/mot17.pth.tar" --nms 0.95 -n "../outputs/1. det/mot17_test_0.95.pickle" -b 1 -d 1 --fp16 --fuse
 
 # For MOT20 validation
-python detect.py -f "exps/yolox_x_mot20_val.py" -c "weights/mot20_train_half.pth.tar" -b 1 -d 1 -n "../outputs/1. det/mot20_val_half.pickle" --fp16 --fuse
+python detect.py -f "exps/yolox_x_mot20_val.py" -c "weights/mot20_half.pth.tar" --nms 0.80 -n "../outputs/1. det/mot20_val_0.80.pickle" -b 1 -d 1 --fp16 --fuse
+python detect.py -f "exps/yolox_x_mot20_val.py" -c "weights/mot20_half.pth.tar" --nms 0.95 -n "../outputs/1. det/mot20_val_0.95.pickle" -b 1 -d 1 --fp16 --fuse
 
 # For MOT20 test
-python detect.py -f "exps/yolox_x_mot20_test.py" -c "weights/mot20_train.pth.tar" -b 1 -d 1 -n "../outputs/1. det/mot20_test.pickle" --fp16 --fuse
+python detect.py -f "exps/yolox_x_mot20_test.py" -c "weights/mot20.pth.tar" --nms 0.80 -n "../outputs/1. det/mot20_test_0.80.pickle" -b 1 -d 1 --fp16 --fuse
+python detect.py -f "exps/yolox_x_mot20_test.py" -c "weights/mot20.pth.tar" --nms 0.95 -n "../outputs/1. det/mot20_test_0.95.pickle" -b 1 -d 1 --fp16 --fuse
 
 # For DanceTrack val
-python detect.py -f "exps/yolox_x_dance_val.py" -c "weights/dance_train.pth.tar" -b 1 -d 1 -n "../outputs/1. det/dance_val.pickle" --fp16 --fuse
+python detect.py -f "exps/yolox_x_dance_val.py" -c "weights/dance.pth.tar" --nms 0.80 -n "../outputs/1. det/dance_val_0.80.pickle" -b 1 -d 1 --fp16 --fuse
+python detect.py -f "exps/yolox_x_dance_val.py" -c "weights/dance.pth.tar" --nms 0.95 -n "../outputs/1. det/dance_val_0.95.pickle" -b 1 -d 1 --fp16 --fuse
 
 # For DanceTrack test
-python detect.py -f "exps/yolox_x_dance_test.py" -c "weights/dance_train.pth.tar" -b 1 -d 1 -n "../outputs/1. det/dance_test.pickle" --fp16 --fuse
+python detect.py -f "exps/yolox_x_dance_test.py" -c "weights/dance.pth.tar" --nms 0.80 -n "../outputs/1. det/dance_test_0.80.pickle" -b 1 -d 1 --fp16 --fuse
+python detect.py -f "exps/yolox_x_dance_test.py" -c "weights/dance.pth.tar" --nms 0.95 -n "../outputs/1. det/dance_test_0.95.pickle" -b 1 -d 1 --fp16 --fuse
 
 ```
 
