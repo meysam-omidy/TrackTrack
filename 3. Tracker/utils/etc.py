@@ -19,9 +19,14 @@ def set_parameters(args, vid_name, mode):
             args.pickle_path_95 = args.pickle_dir + 'mot17_test_0.95.pickle'
             args.data_path = args.data_dir + 'MOT17/test/'
 
-        # Parameters
-        args.det_thr = 0.60
-        args.init_thr = 0.60 if '14' in vid_name else 0.70
+        if '01' in vid_name or '03' in vid_name or '12' in vid_name:
+            args.det_thr, args.init_thr = 0.65, 0.75
+        elif '07' in vid_name:
+            args.det_thr, args.init_thr = 0.60, 0.60
+        elif '14' in vid_name:
+            args.det_thr, args.init_thr = 0.45, 0.55
+        else:
+            args.det_thr, args.init_thr = 0.60, 0.70
         args.match_thr = 0.70
 
     elif 'MOT20' in vid_name:
@@ -34,9 +39,12 @@ def set_parameters(args, vid_name, mode):
             args.pickle_path_95 = args.pickle_dir + 'mot20_test_0.95.pickle'
             args.data_path = args.data_dir + 'MOT20/test/'
 
-        # Baseline Setting
-        args.det_thr = 0.40
-        args.init_thr = 0.50 if '04' in vid_name or '07' in vid_name else 0.40
+        if '08' in vid_name:
+            args.det_thr, args.init_thr = 0.30, 0.40
+        if '04' in vid_name or '06' in vid_name or '07' in vid_name:
+            args.det_thr, args.init_thr = 0.40, 0.50
+        else:
+            args.det_thr, args.init_thr = 0.40, 0.40
         args.match_thr = 0.55
 
     else:
