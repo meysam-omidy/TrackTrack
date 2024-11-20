@@ -18,14 +18,14 @@ def find_deleted_detections(dets, dets_95):
 
 
 def iou_distance(a_tracks, b_tracks):
-    # Initialization
+    # Get boxes
     a_boxes = np.ascontiguousarray([track.x1y1x2y2 for track in a_tracks], dtype=np.float64)
     b_boxes = np.ascontiguousarray([track.x1y1x2y2 for track in b_tracks], dtype=np.float64)
 
     # Calculate IoU distance
     if len(a_boxes) == 0 or len(b_boxes) == 0:
-        iou_dist = np.ones((len(a_boxes), len(b_boxes)), dtype=np.float64)
-        iou_sim = 1 - iou_dist
+        iou_sim = np.zeros((len(a_boxes), len(b_boxes)), dtype=np.float64)
+        iou_dist = 1 - iou_sim
     else:
         # Calculate HIoU
         h_iou = (np.minimum(a_boxes[:, 3:4], b_boxes[:, 3:4].T) - np.maximum(a_boxes[:, 1:2], b_boxes[:, 1:2].T))
@@ -35,26 +35,26 @@ def iou_distance(a_tracks, b_tracks):
         iou_sim = bbox_overlaps(a_boxes, b_boxes)
         iou_dist = 1 - h_iou * iou_sim
 
-    return iou_dist, iou_sim
+    return iou_sim, iou_dist
 
 
 def cos_distance(tracks, dets):
-    # Calculate cosine distance
+    # Check
     if len(tracks) == 0 or len(dets) == 0:
-        cos_dist = np.ones((len(tracks), len(dets)), dtype=np.float64)
-    else:
-        t_feat = np.concatenate([t.feat for t in tracks], axis=0)
-        d_feat = np.concatenate([d.feat for d in dets], axis=0)
-        cos_dist = np.clip(1 - np.dot(t_feat, d_feat.T), a_min=0., a_max=1.)
+        return np.ones((len(tracks), len(dets)), dtype=np.float64)
+
+    # Calculate cosine distance
+    t_feat = np.concatenate([t.feat for t in tracks], axis=0)
+    d_feat = np.concatenate([d.feat for d in dets], axis=0)
+    cos_dist = np.clip(1 - np.dot(t_feat, d_feat.T), a_min=0., a_max=1.)
 
     return cos_dist
 
 
 def conf_distance(tracks, dets):
-    # Initialization
-    sim_matrix = np.zeros((len(tracks), len(dets)), dtype=np.float64)
+    # Check
     if len(tracks) == 0 or len(dets) == 0:
-        return sim_matrix
+        return np.ones((len(tracks), len(dets)), dtype=np.float64)
 
     # Get previous scores
     t_score_prev = []
@@ -175,25 +175,29 @@ def associate(cost, match_thr):
     return matches
 
 
-def iterative_assigment(tracks, dets_high, dets_low, dets_del_high, match_thr, penalty, reduce_step, frame_id, d_t=3):
+def iterative_assigment(tracks, dets_high, dets_low, dets_del_high, match_thr, penalty_p, penalty_q,
+                        reduce_step, frame_id, d_t=3):
     # Initialization
     matches = []
     dets = dets_high + dets_low + dets_del_high
 
+    # Calculate preliminaries
+    iou_sim, iou_dist = iou_distance(tracks, dets)
+    cos_dist = cos_distance(tracks, dets)
+
     # Calculate cost
-    iou_dist, iou_sim = iou_distance(tracks, dets)
-    cost = 0.5 * iou_dist + 0.5 * cos_distance(tracks, dets)
-    cost += 0.1 * conf_distance(tracks, dets) + 0.05 * angle_distance(tracks, dets, frame_id, d_t)
+    cost = 0.50 * iou_dist + 0.50 * cos_dist
+    cost += 0.10 * conf_distance(tracks, dets) + 0.05 * angle_distance(tracks, dets, frame_id, d_t)
 
     # Give penalty
-    cost[:, len(dets_high):] += penalty
-    cost[:, len(dets_high + dets_low):] += penalty
+    cost[:, len(dets_high):len(dets_high + dets_low)] += penalty_p
+    cost[:, len(dets_high + dets_low):] += penalty_q
 
     # Constraint & Clip
     cost[iou_sim <= 0.10] = 1.
     cost = np.clip(cost, 0, 1)
 
-    # Linear assignment
+    # # Linear assignment
     # matches, u_tracks, u_dets = linear_assignment(cost, match_thr)
 
     # Match
