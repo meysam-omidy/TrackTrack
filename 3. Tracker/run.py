@@ -4,9 +4,9 @@ import pickle
 import argparse
 from utils.etc import *
 from AFLink.AppFreeLink import *
-from trackers.tcmot import Tracker
 from AFLink.model import PostLinker
 from AFLink.dataset import LinkData
+from trackers.tracker import Tracker
 from utils.gbi import gb_interpolation
 
 
@@ -25,7 +25,8 @@ def make_parser():
     parser.add_argument("--min_len", type=int, default=3)
     parser.add_argument("--min_box_area", type=float, default=100)
     parser.add_argument("--max_time_lost", type=float, default=30)
-    parser.add_argument("--penalty", type=float, default=0.20)
+    parser.add_argument("--penalty_p", type=float, default=0.20)
+    parser.add_argument("--penalty_q", type=float, default=0.40)
     parser.add_argument("--reduce_step", type=float, default=0.05)
     parser.add_argument("--tai_thr", type=float, default=0.55)
 
@@ -80,7 +81,7 @@ def track(detections, detections_95, data_path, result_folder, mode):
             # Merge
             results.append([frame_id, track_ids, x1y1whs, scores])
 
-        # Write results
+        # Logging & Write results
         result_filename = os.path.join(result_folder, '{}.txt'.format(vid_name))
         write_results(result_filename, results)
 
@@ -93,14 +94,15 @@ def run():
     model.load_state_dict(torch.load('./AFLink/AFLink_epoch20.pth'))
     aflink_dataset = LinkData('', '')
 
-    # Set proper parameters
+    # Logging & Set proper parameters
+    print('Running %s %s...' % (args.dataset, args.mode))
     set_parameters(args, args.dataset, args.mode)
 
     # Make result folder
     trackers_to_eval = args.pickle_path.split('/')[-1].split('.pickle')[0]
     result_folder = os.path.join(args.output_dir, trackers_to_eval)
     os.makedirs(result_folder, exist_ok=True)
-    os.makedirs(result_folder + '_post', exist_ok=True)
+    os.makedirs(result_folder + '_post/', exist_ok=True)
 
     # Read detection result
     with open(args.pickle_path, 'rb') as f:
@@ -112,15 +114,17 @@ def run():
     total_time, total_count = track(detections, detections_95, args.data_path, result_folder, args.mode)
 
     # Post-processing
+    print('Running post-processing...')
     for result_file in os.listdir(result_folder):
         # Set Path
         path_in = result_folder + '/' + str(result_file)
         path_out = result_folder + '_post/' + str(result_file)
 
-        # AFLink
-        linker = AFLink(path_in=path_in, path_out=path_out, model=model, dataset=aflink_dataset,
-                        thrT=(0, 20), thrS=100, thrP=0.05)
-        linker.link()
+        # Link
+        if 'Dance' in args.dataset:
+            linker = AFLink(path_in=path_in, path_out=path_out, model=model, dataset=aflink_dataset,
+                            thrT=(0, 20), thrS=100, thrP=0.05)
+            linker.link()
 
         # Gaussian Interpolation
         if 'MOT' in args.dataset:
@@ -128,7 +132,8 @@ def run():
 
     # Evaluation
     if args.mode == 'val':
-        evaluate(args, trackers_to_eval + '_post/', args.dataset)
+        print('Evaluating...')
+        evaluate(args, trackers_to_eval + '_post', args.dataset)
 
     # Logging
     print(total_count / total_time, flush=True)
