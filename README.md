@@ -1,5 +1,5 @@
-# TCMOT
-Official code for "Track-Centric Multi-Object Tracker"
+# TrackTrack
+Official code for "Focusing on Tracks for Online Multi-Object Tracking"
 
 
 ## Environment
