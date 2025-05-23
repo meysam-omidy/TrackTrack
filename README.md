@@ -16,15 +16,15 @@ Developed in python3.8, pytorch 1.13
 
 **2. Locate codes and datasets as below**
 ```
-- code
-  - 1. YOLOX
-  - 2. FastReID
-  - 3. Tracker
-
-- dataset
-  - MOT17
-  - MOT20
-  - DanceTrack
+- workspace
+  - code
+    - 1. YOLOX
+    - 2. FastReID
+    - 3. Tracker
+  - dataset
+    - MOT17
+    - MOT20
+    - DanceTrack
 ```
 
 <br />
