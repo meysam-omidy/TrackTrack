@@ -1,6 +1,6 @@
 # TrackTrack
-Official code for "Focusing on Tracks for Online Multi-Object Tracking"
-
+Official code for "Focusing on Tracks for Online Multi-Object Tracking", CVPR, 2025
+  - https://cvpr.thecvf.com/virtual/2025/poster/35174
 
 ## Environment
 Developed in python3.8, pytorch 1.13
