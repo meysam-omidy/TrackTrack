@@ -36,8 +36,7 @@ run 2. FastReID
 run 3. Tracker
 ```
 
-
 ## Results
-![image](https://github.com/user-attachments/assets/35063890-6684-4909-8215-e277cf20a1ac){: width="400" height="400"}
-![image](https://github.com/user-attachments/assets/f3467ebe-5d6c-4179-9885-232ac2dfa07a){: width="400" height="400"}
-![image](https://github.com/user-attachments/assets/5f389a10-a587-4b71-b277-c5830fc81dbb){: width="400" height="400"}
+<img src="https://github.com/user-attachments/assets/35063890-6684-4909-8215-e277cf20a1ac" width="550" height="550" />
+<img src="https://github.com/user-attachments/assets/f3467ebe-5d6c-4179-9885-232ac2dfa07a" width="550" height="550" />
+<img src="https://github.com/user-attachments/assets/5f389a10-a587-4b71-b277-c5830fc81dbb" width="550" height="550" />
