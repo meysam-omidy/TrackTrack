@@ -1,7 +1,7 @@
 # TrackTrack
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/focusing-on-tracks-for-online-multi-object/multi-object-tracking-on-mot17)](https://paperswithcode.com/sota/multi-object-tracking-on-mot17?p=focusing-on-tracks-for-online-multi-object)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/focusing-on-tracks-for-online-multi-object/multi-object-tracking-on-mot20-1)](https://paperswithcode.com/sota/multi-object-tracking-on-mot20-1?p=focusing-on-tracks-for-online-multi-object)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/focusing-on-tracks-for-online-multi-object/multi-object-tracking-on-dancetrack)](https://paperswithcode.com/sota/multi-object-tracking-on-dancetrack?p=focusing-on-tracks-for-online-multi-object)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/focusing-on-tracks-for-online-multi-object/multi-object-tracking-on-mot17)](https://paperswithcode.com/sota/multi-object-tracking-on-mot17?p=focusing-on-tracks-for-online-multi-object)<br>
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/focusing-on-tracks-for-online-multi-object/multi-object-tracking-on-mot20-1)](https://paperswithcode.com/sota/multi-object-tracking-on-mot20-1?p=focusing-on-tracks-for-online-multi-object)<br>
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/focusing-on-tracks-for-online-multi-object/multi-object-tracking-on-dancetrack)](https://paperswithcode.com/sota/multi-object-tracking-on-dancetrack?p=focusing-on-tracks-for-online-multi-object)<br>
 Official code for "Focusing on Tracks for Online Multi-Object Tracking", CVPR, 2025
   - https://cvpr.thecvf.com/virtual/2025/poster/35174
 
