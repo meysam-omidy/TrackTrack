@@ -4,7 +4,7 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/focusing-on-tracks-for-online-multi-object/multi-object-tracking-on-dancetrack)](https://paperswithcode.com/sota/multi-object-tracking-on-dancetrack?p=focusing-on-tracks-for-online-multi-object)<br>
 
 Official code for "Focusing on Tracks for Online Multi-Object Tracking", CVPR, 2025
-  - https://cvpr.thecvf.com/virtual/2025/poster/35174
+  - https://openaccess.thecvf.com/content/CVPR2025/html/Shim_Focusing_on_Tracks_for_Online_Multi-Object_Tracking_CVPR_2025_paper.html
 
 ## Environment
 Developed in python3.8, pytorch 1.13
