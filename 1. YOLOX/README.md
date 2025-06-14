@@ -15,6 +15,10 @@ Save weights files under "./weights/"
   - [mot20.pth.tar](https://drive.google.com/file/d/1FunATdHrWfK95RiiEIw2GJ-gXB-tXMPB/view?usp=drive_link)
   - [dance.pth.tar](https://drive.google.com/file/d/1ZKpYmFYCsRdXuOL60NRuc7VXAFYRskXB/view?usp=drive_link)
 
+## Detection Results
+Save detection result files under "../outputs/1. det/"
+  - [detection result files](https://drive.google.com/drive/folders/1Ef-O0DCZAS8ObqJ9cv751ils-KehSgA7?usp=sharing)
+    
 ## Run
 Detection results will be created under "../outputs/1. det/" as pickle files
 ```
