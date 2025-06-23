@@ -95,6 +95,8 @@ def main(exp, args, num_gpu):
 
     # start evaluate, x1y1x2y2
     det_results = evaluator.detect(model, args.fp16)
+    
+    os.makedirs(os.path.dirname(args.exp_name), exist_ok=True)
 
     with open(args.exp_name, 'wb') as f:
         pickle.dump(det_results, f, protocol=pickle.HIGHEST_PROTOCOL)
