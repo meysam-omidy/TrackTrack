@@ -64,7 +64,9 @@ if __name__ == "__main__":
 
             # Logging
             print(vid_name, frame_id, flush=True)
-
+            
+    os.makedirs(os.path.dirname(args.output_path), exist_ok=True)
+    
     # Save
     with open(args.output_path, 'wb') as handle:
         pickle.dump(detections, handle, protocol=pickle.HIGHEST_PROTOCOL)
